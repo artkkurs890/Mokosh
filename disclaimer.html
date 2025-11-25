@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отказ от ответственности | MokoshBuilds</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Тот же CSS что и в предыдущих страницах */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #000000;
+            --secondary: #0a0a0a;
+            --accent: #ff003c;
+            --accent-glow: rgba(255, 0, 60, 0.3);
+            --text: #ffffff;
+            --text-secondary: #888888;
+            --card-bg: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            background: var(--primary);
+            color: var(--text);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--accent);
+            border-radius: 50%;
+            opacity: 0;
+            animation: float 6s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+            background: rgba(0, 0, 0, 0.98);
+            padding: 0.5rem 0;
+        }
+
+        .nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--accent), #ff3366);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: var(--accent);
+            color: var(--text);
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px var(--accent-glow);
+            background: #ff3366;
+        }
+
+        .page-hero {
+            min-height: 40vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: radial-gradient(circle at top right, rgba(255, 0, 60, 0.1), transparent 50%);
+            overflow: hidden;
+            padding-top: 100px;
+        }
+
+        .page-hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-hero-badge {
+            display: inline-block;
+            background: var(--card-bg);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            animation: pulse 2s infinite;
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .page-hero-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #fff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+        }
+
+        .page-hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .content-section {
+            padding: 80px 0;
+            background: var(--primary);
+        }
+
+        .content-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .legal-content {
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .legal-section {
+            margin-bottom: 3rem;
+        }
+
+        .legal-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .legal-text {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .legal-list {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+
+        .legal-list li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        .warning-box {
+            background: rgba(255, 0, 60, 0.1);
+            border: 1px solid var(--accent);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .warning-box strong {
+            color: var(--accent);
+        }
+
+        .danger-box {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid #ff0000;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .danger-box strong {
+            color: #ff0000;
+        }
+
+        .info-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .footer {
+            background: var(--primary);
+            padding: 4rem 0 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: var(--card-bg);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-link:hover {
+            background: var(--accent);
+            color: var(--primary);
+            transform: translateY(-2px);
+            border-color: var(--accent);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .page-hero-title {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .legal-content {
+                padding: 2rem;
+            }
+            
+            .content-container {
+                padding: 0 1rem;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Particles Background -->
+    <div class="particles-container" id="particles"></div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="nav">
+            <a href="index.html" class="logo">MokoshBuilds</a>
+            <ul class="nav-links">
+                <li><a href="index.html#features">Особенности</a></li>
+                <li><a href="download.html">Сборки</a></li>
+                <li><a href="index.html#faq">FAQ</a></li>
+                <li><a href="https://akkpowered.pp.ua/">Сообщество</a></li>
+            </ul>
+            <a href="download.html" class="cta-button">Скачать</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="page-hero">
+        <div class="page-hero-content">
+            <div class="page-hero-badge">⚠️ Важная информация</div>
+            <h1 class="page-hero-title">Отказ от ответственности</h1>
+            <p class="page-hero-subtitle">Правовые ограничения и предупреждения о рисках</p>
+        </div>
+    </section>
+
+    <!-- Content Section -->
+    <section class="content-section">
+        <div class="content-container">
+            <div class="legal-content fade-in">
+                <div class="danger-box">
+                    <strong>🚨 ВНИМАНИЕ:</strong> Использование сборок MokoshBuilds связано с определёнными 
+                    рисками. Устанавливая наши сборки, вы принимаете на себя полную ответственность 
+                    за все последствия.
+                </div>
+
+                <div class="legal-section">
+                    <h2 class="section-title">1. Общие положения</h2>
+                    <p class="legal-text">
+                        Проект MokoshBuilds предоставляет модифицированные образы операционной системы 
+                        Windows исключительно в образовательных и тестовых целях. Мы не несём ответственности 
+                        за любой ущерб, прямой или косвенный, возникший в результате использования наших сборок.
+                    </p>
+                </div>
+
+                <div class="legal-section">
+                    <h2 class="section-title">2. Правовые аспекты</h2>
+                    <p class="legal-text">
+                        Проект MokoshBuilds не аффилирован с Microsoft Corporation. Все права на 
+                        операционную систему Windows принадлежат Microsoft. Мы не предоставляем 
+                        лицензии на использование Windows и не занимаемся активацией системы.
+                    </p>
+                    
+                    <div class="warning-box">
+                        <strong>⚖️ Юридическое предупреждение:</strong> Для легального использования Windows 
+                        требуется действующая лицензия от Microsoft. Использование нелицензионных копий 
+                        Windows может нарушать законодательство вашей страны.
+                    </div>
+                </div>
+
+                <div class="legal-section">
+                    <h2 class="section-title">3. Технические риски</h2>
+                    <p class="legal-text">
+                        Использование модифицированных сборок операционной системы связано с 
+                        определёнными техническими рисками:
+                    </p>
+                    
+                    <ul class="legal-list">
+                        <li>Возможная нестабильность системы</li>
+                        <li>Проблемы с совместимостью оборудования и программного обеспечения</li>
+                        <li>Конфликты с драйверами устройств</li>
+                        <li>Проблемы с Центром обновления Windows</li>
+                        <li>Потеря данных в результате сбоев</li>
+                        <li>Проблемы с активацией и цифровыми лицензиями</li>
+                    </ul>
+                    
+                    <div class="info-box">
+                        💡 <strong>Рекомендация:</strong> Перед установкой создайте полную резервную копию 
+                        важных данных и убедитесь в наличии точек восстановления системы.
+                    </div>
+                </div>
+
+                <div class="legal-section">
+                    <h2 class="section-title">4. Отказ от гарантий</h2>
+                    <p class="legal-text">
+                        Сборки предоставляются по принципу "как есть" без каких-либо гарантий, 
+                        явных или подразумеваемых. В частности, мы не гарантируем:
+                    </p>
+                    
+                    <ul class="legal-list">
+                        <li>Стабильность и безошибочность работы</li>
+                        <li>Совместимость с конкретным оборудованием или программным обеспечением</li>
+                        <li>Безопасность и отсутствие уязвимостей</li>
+                        <li>Работу всех системных компонентов</li>
+                        <li>Поддержку и обновления в будущем</li>
+                    </ul>
+                </div>
+
+                <div class="legal-section">
+                    <h2 class="section-title">5. Ограничение ответственности</h2>
+                    <p class="legal-text">
+                        Ни при каких обстоятельствах проект MokoshBuilds, его создатели или 
+                        участники не несут ответственности за:
+                    </p>
+                    
+                    <ul class="legal-list">
+                        <li>Прямой, косвенный, случайный или последующий ущерб</li>
+                        <li>Потерю данных или прибыли</li>
+                        <li>Прерывание коммерческой деятельности</li>
+                        <li>Любые другие убытки, возникшие в результате использования сборок</li>
+                        <li>Юридические последствия использования модифицированных образов</li>
+                    </ul>
+                </div>
+
+                <div class="legal-section">
+                    <h2 class="section-title">6. Безопасность и конфиденциальность</h2>
+                    <p class="legal-text">
+                        Хотя наши сборки содержат улучшения конфиденциальности, мы не можем 
+                        гарантировать абсолютную безопасность. Пользователь самостоятельно несёт 
+                        ответственность за:
+                    </p>
+                    
+                    <ul class="legal-list">
+                        <li>Защиту своих данных и учетных записей</li>
+                        <li>Использование антивирусного программного обеспечения</li>
+                        <li>Своевременное обновление системы и приложений</li>
+                        <li>Соблюдение мер кибербезопасности</li>
+                    </ul>
+                </div>
+
+                <div class="legal-section">
+                    <h2 class="section-title">7. Изменения в системе</h2>
+                    <p class="legal-text">
+                        Наши сборки содержат значительные изменения по сравнению со стандартной 
+                        Windows. Эти изменения могут повлиять на:
+                    </p>
+                    
+                    <ul class="legal-list">
+                        <li>Работу некоторых приложений и игр</li>
+                        <li>Функциональность определённых компонентов системы</li>
+                        <li>Производительность на конкретном оборудовании</li>
+                        <li>Совместимость с корпоративными средами</li>
+                    </ul>
+                </div>
+
+                <div class="legal-section">
+                    <h2 class="section-title">8. Согласие с условиями</h2>
+                    <p class="legal-text">
+                        Используя сборки MokoshBuilds, вы подтверждаете, что:
+                    </p>
+                    
+                    <ul class="legal-list">
+                        <li>Прочитали и поняли все пункты данного отказа от ответственности</li>
+                        <li>Осознаёте все связанные с использованием риски</li>
+                        <li>Обладаете необходимой технической квалификацией для установки ОС</li>
+                        <li>Имеете легальную лицензию на используемую версию Windows</li>
+                        <li>Принимаете на себя полную ответственность за все последствия</li>
+                    </ul>
+                    
+                    <div class="danger-box">
+                        <strong>🎯 ИТОГОВОЕ ПРЕДУПРЕЖДЕНИЕ:</strong> Если вы не согласны с любым из 
+                        вышеперечисленных пунктов, НЕ ИСПОЛЬЗУЙТЕ наши сборки. Установка и использование 
+                        происходят исключительно на ваш страх и риск.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>MokoshBuilds</h3>
+                <p>Мощные, чистые и быстрые сборки Windows для тех, кто ценит производительность и приватность.</p>
+                <div class="social-links">
+                    <a href="https://github.com/artkkurs890/Mokosh/releases" class="social-link"><i class="fab fa-github"></i></a>
+                    <a href="https://discord.gg/dwWKZp3QJj" class="social-link"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Сборки</h3>
+                <ul class="footer-links">
+                    <li><a href="download.html">Windows 11 Home</a></li>
+                    <li><a href="download.html">Windows 11 Pro</a></li>
+                    <li><a href="download.html">Windows 10 LTSC</a></li>
+                    <li><a href="download.html">Архивные версии</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Поддержка</h3>
+                <ul class="footer-links">
+                    <li><a href="https://akkpowered.pp.ua/docs/mokoshbuilds/">Документация</a></li>
+                    <li><a href="https://akkpowered.pp.ua/">Форум</a></li>
+                    <li><a href="https://github.com/users/artkkurs890/projects/2">Баги и предложения</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Правовая информация</h3>
+                <ul class="footer-links">
+                    <li><a href="license.html">Лицензия</a></li>
+                    <li><a href="privacy.html">Конфиденциальность</a></li>
+                    <li><a href="disclaimer.html">Отказ от ответственности</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024-2025 MokoshBuilds. Не аффилирован с Microsoft Corporation.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Create particles
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                const size = Math.random() * 4 + 1;
+                const left = Math.random() * 100;
+                const delay = Math.random() * 6;
+                const duration = Math.random() * 4 + 4;
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${left}vw`;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.opacity = Math.random() * 0.5 + 0.1;
+                
+                container.appendChild(particle);
+            }
+        }
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Initialize particles
+        createParticles();
+    </script>
+</body>
+</html>
